@@ -1,46 +1,126 @@
-# Readme File: Edge Router and ISPs Overview
+**Configuration Settings**
 
----
+* **Enable Password :**
+  - `enable secret cisco` 
+* **Username and Password:**
+  - `username admin secret cisco` 
 
-## Overview de l'Architecture du Routeur (Edge Router) et des Fournisseurs de Services Internet (ISPs)
 
-Ce document fournit un aperçu de l'architecture du routeur Edge et des fournisseurs de services Internet (ISPs) qui sont des composants essentiels de l'infrastructure réseau d'une entreprise. L'Edge Router, nommé vIOS-EDGE-I, assure la connectivité entre le réseau de l'entreprise et Internet via deux ISPs. ISP1 et ISP2, fournissent les connexions Internet au routeur Edge . Cette architecture permet à l'entreprise d'accéder à Internet de manière sécurisée et fiable.
-### Contenu :
+**Interfaces configuration**
 
-1. **Introduction**
-2. **Composants de l'architecture**
-3. **Résumé de la configuration**
-4. **Dépannage et surveillance**
-5. **Mesures de sécurité**
-6. **Conclusion**
+* **GigabitEthernet 0/0**
 
----
-## 1. Introduction :
+    - `interface GigabitEthernet 0/0`
+    - `description Link to ASA-DMZ-I`
+    - `ip address 195.1.1.129 255.255.255.252`
+    - `no shutdown`
+    - `exit`
 
-L'architecture du routeur Edge et des ISPs joue un rôle important dans l'infrastructure réseau d'une entreprise. Elle permet à l'entreprise d'établir des connexions sécurisées et fiables avec Internet, essentielles pour ses opérations quotidiennes.
+* **GigabitEthernet 0/1**
 
-## 2. Composants de l'architecture :
+    - `interface GigabitEthernet0/1`
+    - `description Link to ISP1`
+    - `ip address 198.10.10.2 255.255.255.252`
+    - `no shutdown`
+    - `exit`
 
-Cette architecture comprend les composants suivants :
+* **GigabitEthernet 0/2**
 
-- **Edge Router (vIOS-EDGE-I) :**  Agit comme la passerelle de sécurité principale entre le réseau interne et l'internet. Il filtre le trafic entrant et sortant en fonction de règles et de politiques prédéfinies.
+    - `interface GigabitEthernet0/2`
+    - `description Link to ASAv-I`
+    - `ip address 172.16.0.2 255.255.255.252`
+    - `no shutdown`
+    - `exit`
 
-- **Fournisseurs de Services Internet (ISPs) :**  Fournissent les connexions Internet pour l'architecture en passent par  Edge router. Les ISPs sont responsables de l'acheminement du trafic Internet de l'entreprise vers Internet et vice versa.
+* **GigabitEthernet 0/3**
+    - `interface GigabitEthernet0/3`
+    - `description Link to ISP2`
+    - `ip address 197.10.10.2 255.255.255.252`
+    - `no shutdown`
+    - `exit`
 
-## 3. Résumé de la configuration :
+* **LoopBack 0**
+    - `interface loopback 0`
+    - `description Management`
+    - `ip address 10.1.1.5 255.255.255.255`
+    - `no shutdown`
+    - `exit`
 
-La configuration détaillée du routeur Edge (vIOS-EDGE-I) et des ISPs (ISP1 et ISP2) est décrite dans des fichiers séparés. Cette configuration comprend :
 
-- **Configuration du routeur Edge (vIOS-EDGE-I) :**  Définit la configuration initiale, les informations d'identification de connexion, les adresses IP, les niveaux de sécurité, les routes statiques ainsi que le routege avec bgp, les listes d'accès(ACL), l'accès SSH, le NTP, le client DNS et la journalisation 
+**NAT Configuration**
+* **Standard access-list 1**
+    - `access-list 1 permit 192.168.10.0 0.0.0.255`
+    - `access-list 1 permit 192.168.20.0 0.0.0.255`
+    - `access-list 1 permit 192.168.30.0 0.0.0.255`
+    - `access-list 1 permit 192.168.40.0 0.0.0.255`
+    - `access-list 1 permit 10.0.0.0 0.0.0.255`
+    - `access-list 1 permit 10.1.1.0 0.0.0.255`
+    - `access-list 1 permit 172.16.0.0 0.0.0.255`
+    - `access-list 1 permit 172.16.50.0 0.0.0.255`
+    - `access-list 1 deny any`
+* **NAT pool of inside global addresses**
+    - `ip nat pool 1 195.1.1.1 195.1.1.127 netmask 255.255.255.128`
+* **NAT Overload**
+    - `ip nat inside source list 1 pool 1 overload`
+* **Inside and outside interfaces**
+    
+* **GigabitEthernet 0/0**
 
-- **Configuration des ISPs (ISP1 et ISP2) :**
-Spécifie la configuration des adresses IP, les paramètres BGP, la configuration NAT, la configuration DNS et les mesures de sécurité. 
-## 4. Dépannage et surveillance :
+    - `interface GigabitEthernet 0/0`
+    - `description Link to ASA-DMZ-I`
+    - `ip address 195.1.1.129 255.255.255.252`
+    - `no shutdown`
+    - `exit`
 
-Cela comprend la vérification de l'état des connexions, la surveillance du trafic Internet, et la résolution des problèmes de connectivité.Lorsqu'une entreprise est connectée à deux fournisseurs d'internet avec un seul routeur Edge. L'intégralité du réseaux est annoncée aux deux ISPs via le protocole de routage BGP. Lorsqu'un des ISPs tombe en panne, le trafic entrant vers l'entreprise n'est pas affecté et le trafic sortant du routeur périphérique vers Internet est principalement envoyé au ISP1 mais lorsque ISP1 tombe en panne, le trafic est envoyé via le ISP2 donc cc'est une solution.
+* **GigabitEthernet 0/1**
 
-## 5. Mesures de sécurité :
-Les mesures de sécurité mises en œuvre pour le routeur Edge et les ISPs comprennent les listes de contrôle d'accès (ACL), l'authentification, le chiffrement des données, et la surveillance des logs pour détecter les activités suspectes.
-## 6. Conclusion
+    - `interface GigabitEthernet0/1`
+    - `description Link to ISP1`
+    - `ip address 198.10.10.2 255.255.255.252`
+    - `no shutdown`
+    - `exit`
 
-Le routeur (Edge) et les fournisseurs de services Internet(ISPs) sont des éléments essentiels de l'infrastructure réseau d'une entreprise. En mettant en œuvre des configurations et des services appropriés, l'entreprise peut garantir la disponibilité, la sécurité et les performances nécessaires pour répondre à ses besoins opérationnels.
+* **GigabitEthernet 0/2**
+
+    - `interface GigabitEthernet0/2`
+    - `description Link to ASAv-I`
+    - `ip address 172.16.0.2 255.255.255.252`
+    - `no shutdown`
+    - `exit`
+
+* **GigabitEthernet 0/3**
+    - `interface GigabitEthernet0/3`
+    - `description Link to ISP2`
+    - `ip address 197.10.10.2 255.255.255.252`
+    - `no shutdown`
+    - `exit`
+
+
+**Security**
+
+* **Using SSH version 2**
+    - `ip ssh version 2` (Enforce SSH version 2 for more secure connections)
+    - `ip domain-name companyXYZ_2.sk`
+    - `crypto key generate rsa modulus 4096`
+* **Restrecting remote access only to SSH**
+    - `line vty 0 1500`
+    - `transport input ssh`
+    - `login local `
+* **Message digest (MD5) authentication password**
+    - `area 0 authentication message-digest`
+    - `key 36 md5 key_for_md5`
+    - `area 0 authentication message-digest-key 36`
+
+**NTP Synchronization**
+
+* Configure NTP
+    - `ntp server 172.16.50.1`
+    - `clock timezone UTC+2 +2`
+
+**Loggins**
+
+* Enable logging for network events:
+    - `logging host 172.16.50.1`
+    - `logging trap notifications`
+
+
