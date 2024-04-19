@@ -82,13 +82,15 @@
         - `ip nat inside`
 
 **Static Routes Configuration**
+
     - `ip route 172.16.0.0 255.255.0.0 172.16.0.1`
-    - ` ip route 192.168.0.0 255.255.192.0 172.16.0.1`
+    - `ip route 192.168.0.0 255.255.192.0 172.16.0.1`
     - `ip route 10.0.0.0 255.0.0.0 172.16.0.1`
     - `ip route 195.1.1.128 255.255.255.128 195.1.1.130`
     - `ip route 195.1.1.0 255.255.255.0 null0`
 
 **eBGP Configuration**
+
     - `router bgp 64500`
     - `neighbor 198.10.10.1 remote-as 64501`
     - `neighbor 198.10.10.1 password isp1md5pass`
@@ -105,16 +107,19 @@
     
 
 **NTP Configuration**
+
     - `ntp server 172.16.50.1`
     - `clock timezone UTC+2 +2`
     - ` ntp source loopback 0`
 
 **Logging Configuration**
+
     - `logging trap notifications`
     - `logging host 172.16.50.1`
     - `logging source-interface loopback 0`
 
 **Dns Client Configuration**
+
     - `ip name-server 195.1.1.161`
     - `ip domain-lookup`
 
@@ -122,15 +127,18 @@
 **Security**
 
 * **Using SSH version 2**
+
     - `ip ssh version 2` (Enforce SSH version 2 for more secure connections)
     - `ip domain-name companyXYZ.sk`
     - `crypto key generate rsa modulus 4096`
 * **Restrecting remote access only to SSH**
+
     - `line vty 0 924`
     - `login local `
     - `transport input ssh`
     - `access-class ssh-access in `
 * **standard access-list ssh-access that permits login to VTY from the management subnet 192.168.40.0/24 only.**
+
     - `ip access-list standard ssh-access`
     - `permit 192.168.40.0 0.0.0.255`
     - `deny any`
