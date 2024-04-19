@@ -4,7 +4,8 @@
 
 ## Overview de l'Architecture du Routeur (Edge Router) et des Fournisseurs de Services Internet (ISPs)
 
-Ce document fournit un aperçu de l'architecture du routeur Edge et des fournisseurs de services Internet (ISPs) qui sont des composants essentiels de l'infrastructure réseau d'une entreprise. L'Edge Router, nommé vIOS-EDGE-I, assure la connectivité entre le réseau de l'entreprise et Internet via deux ISPs. Les ISPs, ISP1 et ISP2, fournissent les connexions Internet au routeur Edge . Cette architecture permet à l'entreprise d'accéder à Internet de manière sécurisée et fiable.
+Ce document fournit un aperçu de l'architecture du routeur Edge et des fournisseurs de services Internet (ISPs) qui sont des composants essentiels de l'infrastructure réseau d'une entreprise. L'Edge Router, nommé vIOS-EDGE-I, assure la connectivité entre le réseau de l'entreprise et Internet via deux ISPs.
+Les ISPs, ISP1 et ISP2, fournissent les connexions Internet au routeur Edge . Cette architecture permet à l'entreprise d'accéder à Internet de manière sécurisée et fiable.
 ### Contenu :
 
 1. **Introduction**
