@@ -4,7 +4,7 @@
 
 ## Overview de l'Architecture du Routeur (Edge Router) et des Fournisseurs de Services Internet (ISPs)
 
-Ce document fournit un aperçu de l'architecture du routeur Edge et des fournisseurs de services Internet (ISPs) qui sont des composants essentiels de l'infrastructure réseau d'une entreprise. L'Edge Router, nommé vIOS-EDGE-I, assure la connectivité entre le réseau de l'entreprise et Internet via deux ISPs. Les ISPs, ISP1 et ISP2, fournissent les connexions Internet au routeur de bordure (Edge Router). Cette architecture permet à l'entreprise d'accéder à Internet de manière sécurisée et fiable.
+Ce document fournit un aperçu de l'architecture du routeur Edge et des fournisseurs de services Internet (ISPs) qui sont des composants essentiels de l'infrastructure réseau d'une entreprise. L'Edge Router, nommé vIOS-EDGE-I, assure la connectivité entre le réseau de l'entreprise et Internet via deux ISPs. Les ISPs, ISP1 et ISP2, fournissent les connexions Internet au routeur Edge . Cette architecture permet à l'entreprise d'accéder à Internet de manière sécurisée et fiable.
 ### Contenu :
 
 1. **Introduction**
@@ -29,9 +29,9 @@ Cette architecture comprend les composants suivants :
 
 ## 3. Résumé de la configuration :
 
-La configuration détaillée du routeur de bordure (vIOS-EDGE-I) et des ISPs (ISP1 et ISP2) est décrite dans des fichiers séparés. Cette configuration comprend :
+La configuration détaillée du routeur Edge (vIOS-EDGE-I) et des ISPs (ISP1 et ISP2) est décrite dans des fichiers séparés. Cette configuration comprend :
 
-- **Configuration du routeur de bordure (vIOS-EDGE-I) :**  Définit la configuration initiale, les informations d'identification de connexion, les adresses IP, les niveaux de sécurité, les routes statiques ainsi que le routege avec bgp, les listes d'accès(ACL), l'accès SSH, le NTP, le client DNS et la journalisation 
+- **Configuration du routeur Edge (vIOS-EDGE-I) :**  Définit la configuration initiale, les informations d'identification de connexion, les adresses IP, les niveaux de sécurité, les routes statiques ainsi que le routege avec bgp, les listes d'accès(ACL), l'accès SSH, le NTP, le client DNS et la journalisation 
 
 - **Configuration des ISPs (ISP1 et ISP2) :**
 Spécifie la configuration des adresses IP, les paramètres BGP, la configuration NAT, la configuration DNS et les mesures de sécurité. 
