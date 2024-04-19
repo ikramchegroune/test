@@ -31,13 +31,13 @@ Cette architecture comprend les composants suivants :
 
 La configuration détaillée du routeur de bordure (vIOS-EDGE-I) et des ISPs (ISP1 et ISP2) est décrite dans des fichiers séparés. Cette configuration comprend :
 
-- **Configuration du routeur de bordure (vIOS-EDGE-I) :**  Définit la configuration initiale, les informations d'identification de connexion, les adresses IP, les niveaux de sécurité, les routes statiques ainsi que le routege avec ebgp, les listes d'accès(ACL), l'accès SSH, le NTP, le client DNS, la journalisation 
+- **Configuration du routeur de bordure (vIOS-EDGE-I) :**  Définit la configuration initiale, les informations d'identification de connexion, les adresses IP, les niveaux de sécurité, les routes statiques ainsi que le routege avec bgp, les listes d'accès(ACL), l'accès SSH, le NTP, le client DNS et la journalisation 
 
 - **Configuration des ISPs (ISP1 et ISP2) :**
-Spécifie la configuration des adresses IP, les paramètres eBGP, la configuration NAT, la configuration DNS et les mesures de sécurité. 
+Spécifie la configuration des adresses IP, les paramètres BGP, la configuration NAT, la configuration DNS et les mesures de sécurité. 
 ## 4. Dépannage et surveillance :
 
-Ce document propose des étapes de dépannage et des techniques de surveillance pour le routeur de bordure et les ISPs. Cela comprend la vérification de l'état des connexions, la surveillance du trafic Internet, et la résolution des problèmes de connectivité.
+Cela comprend la vérification de l'état des connexions, la surveillance du trafic Internet, et la résolution des problèmes de connectivité.Lorsqu'une entreprise est connectée à deux fournisseurs d'internet avec un seul routeur Edge. L'intégralité du réseaux est annoncée aux deux ISPs via le protocole de routage BGP. Lorsqu'un des ISPs tombe en panne, le trafic entrant vers l'entreprise n'est pas affecté et le trafic sortant du routeur périphérique vers Internet est principalement envoyé au ISP1 mais lorsque ISP1 tombe en panne, le trafic est envoyé via le ISP2 donc cc'est une solution.
 
 ## 5. Mesures de sécurité :
 Les mesures de sécurité mises en œuvre pour le routeur Edge et les ISPs comprennent les listes de contrôle d'accès (ACL), l'authentification, le chiffrement des données, et la surveillance des logs pour détecter les activités suspectes.
