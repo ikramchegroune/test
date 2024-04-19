@@ -1,5 +1,5 @@
 **Configuration Settings**
-* **Configuration of the router ISP2 is similar to the configuration of the ISP1. For this reason we only share the configuration of ISP1 **
+* **Configuration of the router ISP2 is similar to the configuration of the ISP1. For this reason we only share the configuration of ISP1**
  
 
 
